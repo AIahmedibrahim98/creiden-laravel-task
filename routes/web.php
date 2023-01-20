@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [\App\Http\Controllers\SiteController::class, 'index'])
     ->name('index');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
@@ -26,4 +27,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('profile', [\App\Http\Controllers\SiteController::class, 'profile'])
         ->middleware('password.confirm')
         ->name('profile');
+
+    Route::prefix('items')->as('users.items.')->group(function () {
+        Route::get('/', [UserController::class, 'getItems'])
+            ->name('all');
+        Route::get('/create', [UserController::class, 'createItem'])
+            ->name('create');
+        Route::post('/store', [UserController::class, 'storeItem'])
+            ->name('store');
+    });
 });

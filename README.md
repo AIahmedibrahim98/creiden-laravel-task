@@ -6,6 +6,9 @@
 ```bash
 cp .env.example .env
 ```
+### set database credentials in .env file
+### set wordpress application url in .env file (WORDPRESS_URL)
+
 ### generate key
 ```bash
 php artisan key:generate

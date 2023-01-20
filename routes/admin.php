@@ -43,6 +43,13 @@ Route::prefix('admin')->group(static function () {
         // Users routes
         Route::resource('users', UserController::class);
 
+        // Items CRUD routes
+        Route::delete('user/item/{item}', [UserController::class, 'deleteItem'])->name('users.items.destroy');
+        Route::get('user/{user_id}/item/create', [UserController::class, 'create_item'])->name('users.items.create');
+        Route::post('user/{user_id}/item/create', [UserController::class, 'store_item'])->name('users.items.create');
+        Route::get('user/{user_id}/item/{item_id}/edit', [UserController::class, 'edit_item'])->name('users.items.edit');
+        Route::put('user/{user_id}/item/{item_id}/update', [UserController::class, 'update_item'])->name('users.items.update');
+
     });
 });
 
